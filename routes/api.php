@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BillController;
 use App\Http\Controllers\BudgetController;
 use App\Http\Controllers\PlanController;
 use Illuminate\Http\Request;
@@ -36,6 +37,10 @@ Route::group(['middleware'=>['auth:sanctum']],function (){
     Route::post('/plan/delete/{id}',[PlanController::class,'destroy']);
 
 
+    Route::get('/bill/all',[BillController::class,'show']);
+    Route::post('/bill/add',[BillController::class,'store']);
+    Route::post('/bill/update/{id}',[BillController::class,'update']);
+    Route::post('/bill/delete/{id}',[BillController::class,'destroy']);
 
 });
 
