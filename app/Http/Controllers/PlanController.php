@@ -29,7 +29,7 @@ class PlanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show()
     {
         $plans=Plan::all();
         return response($plans);

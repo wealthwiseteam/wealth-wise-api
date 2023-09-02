@@ -28,6 +28,10 @@ class User extends Authenticatable
     public function budgets(){
         return $this->hasMany(Budget::class);
     }
+
+    public function plans(){
+        return $this->hasMany(Plan::class);
+    }
     /**
      * The attributes that should be hidden for serialization.
      *

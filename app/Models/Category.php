@@ -20,4 +20,8 @@ class Category extends Model
         return $this->hasMany(Budget::class);
     }
 
+    public function plans(){
+        return $this->hasMany(Plan::class);
+    }
+
 }
