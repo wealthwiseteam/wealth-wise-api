@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BudgetController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,13 +16,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//public routes
 Route::post('register',[AuthController::class,'register']);
 Route::post('/login',[AuthController::class,'login']);
 
+//protected routes
 Route::group(['middleware'=>['auth:sanctum']],function (){
-
     Route::post('/logout',[AuthController::class,'logout']);
 
+    Route::get('/budget/all',[BudgetController::class,'show']);
+    Route::post('/budget/add',[BudgetController::class,'store']);
+    Route::post('/budget/update/{id}',[BudgetController::class,'update']);
+    Route::post('/budget/delete/{id}',[BudgetController::class,'destroy']);
 
 });
 

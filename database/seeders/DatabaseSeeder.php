@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Budget;
+use App\Models\Category;
+use Database\Factories\BudgetFactory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,6 +15,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+
+        //$this->call(CategorySeeder::class);
+        //$this->call(BudgetSeeder::class);
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([
