@@ -22,7 +22,7 @@ class PlanController extends Controller
     public function store(Request $request)
     {
         return response([
-            'message'=>'this is store method in budget controller'
+            'message'=>'this is store method in plan controller'
         ]);
     }
 
@@ -41,7 +41,7 @@ class PlanController extends Controller
     public function update(Request $request, string $id)
     {
         return response([
-            'message'=>'this is update method in budget controller'
+            'message'=>'this is update method in plan controller'
         ]);
     }
 
@@ -51,7 +51,7 @@ class PlanController extends Controller
     public function destroy(string $id)
     {
         return response([
-            'message'=>'this is delete method in budget controller'
+            'message'=>'this is delete method in plan controller'
         ]);
     }
 }
