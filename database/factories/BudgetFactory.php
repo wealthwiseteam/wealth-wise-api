@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Budget;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,7 +21,9 @@ class BudgetFactory extends Factory
     {
         return [
             'name' => $this->faker->word,
-            'user_id' => $this->faker->numberBetween(1, 2),
+            'user_id' => function(){
+            return User::factory()->create()>id;
+            } ,
             'amount' => $this->faker->randomFloat(2, 1000, 10000),
             'category_id' => $this->faker->numberBetween(1, 2),
             'start_date' => $this->faker->dateTimeBetween('now', '+1 month'),

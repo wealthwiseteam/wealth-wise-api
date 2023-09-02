@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BudgetController;
+use App\Http\Controllers\PlanController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -28,6 +29,13 @@ Route::group(['middleware'=>['auth:sanctum']],function (){
     Route::post('/budget/add',[BudgetController::class,'store']);
     Route::post('/budget/update/{id}',[BudgetController::class,'update']);
     Route::post('/budget/delete/{id}',[BudgetController::class,'destroy']);
+
+    Route::get('/plan/all',[PlanController::class,'show']);
+    Route::post('/plan/add',[PlanController::class,'store']);
+    Route::post('/plan/update/{id}',[PlanController::class,'update']);
+    Route::post('/plan/delete/{id}',[PlanController::class,'destroy']);
+
+
 
 });
 
