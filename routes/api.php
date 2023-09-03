@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\BudgetController;
 use App\Http\Controllers\PlanController;
+use App\Http\Controllers\TipController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -41,6 +42,8 @@ Route::group(['middleware'=>['auth:sanctum']],function (){
     Route::post('/bill/add',[BillController::class,'store']);
     Route::post('/bill/update/{id}',[BillController::class,'update']);
     Route::post('/bill/delete/{id}',[BillController::class,'destroy']);
+
+    Route::get('tip/all',[TipController::class,'show']);
 
 });
 

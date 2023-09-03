@@ -7,6 +7,7 @@ use App\Models\Budget;
 use App\Models\Category;
 use Database\Factories\BillFactory;
 use Database\Factories\BudgetFactory;
+use Database\Factories\TipFactory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -20,7 +21,9 @@ class DatabaseSeeder extends Seeder
         //$this->call(CategorySeeder::class);
         //$this->call(BudgetSeeder::class);
        // $this->call(PlanSeeder::class);
-        $this->call(BillSeeder::class);
+       // $this->call(BillSeeder::class);
+        //  $this->call(TipSeeder::class);
+
 
         // \App\Models\User::factory(10)->create();
 
