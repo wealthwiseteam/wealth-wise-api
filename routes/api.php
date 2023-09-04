@@ -53,6 +53,7 @@ Route::group(['middleware'=>['auth:sanctum']],function (){
     Route::post('/account/update/{id}',[AccountController::class,'update']);
     Route::post('/account/delete/{id}',[AccountController::class,'destroy']);
 
+    //Routes for transactions not complete
 
     Route::get('tip/all',[TipController::class,'index']);
     Route::get('tip/show/{id}',[TipController::class,'show']);
