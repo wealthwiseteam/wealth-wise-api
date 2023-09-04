@@ -32,6 +32,10 @@ class User extends Authenticatable
     public function plans(){
         return $this->hasMany(Plan::class);
     }
+
+    public function accounts(){
+        return $this->hasMany(Account::class);
+    }
     /**
      * The attributes that should be hidden for serialization.
      *

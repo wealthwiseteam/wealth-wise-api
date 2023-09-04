@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
        // $this->call(BillSeeder::class);
         //  $this->call(TipSeeder::class);
 
+        //$this->call(AccountSeeder::class);
 
         // \App\Models\User::factory(10)->create();
 
