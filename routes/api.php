@@ -4,6 +4,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\BudgetController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\TipController;
 use Illuminate\Http\Request;
@@ -28,11 +29,18 @@ Route::post('/login',[AuthController::class,'login']);
 Route::group(['middleware'=>['auth:sanctum']],function (){
     Route::post('/logout',[AuthController::class,'logout']);
 
+    Route::get('/category/all',[CategoryController::class,'index']);
+    Route::get('/category/show/{id}',[CategoryController::class,'show']);
+    Route::post('/category/add',[CategoryController::class,'store']);
+    Route::post('/category/update/{id}',[CategoryController::class,'update']);
+    Route::post('/category/delete/{id}',[CategoryController::class,'destroy']);
+
     Route::get('/budget/all',[BudgetController::class,'index']);
     Route::get('/budget/show/{id}',[BudgetController::class,'show']);
     Route::post('/budget/add',[BudgetController::class,'store']);
     Route::post('/budget/update/{id}',[BudgetController::class,'update']);
     Route::post('/budget/delete/{id}',[BudgetController::class,'destroy']);
+
 
     Route::get('/plan/all',[PlanController::class,'index']);
     Route::get('/plan/show/{id}',[PlanController::class,'show']);
