@@ -16,11 +16,6 @@ class Transaction extends Model
         'type'
     ];
 
-    public function users()
-    {
-        return $this->belongsTo(User::class);
-    }
-
     public function accounts(){
         return $this->belongsTo(Account::class);
     }
