@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
-use http\Env\Response;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use PHPUnit\Exception;
@@ -24,7 +24,7 @@ class CategoryController extends Controller
                    'category'=>$categories
                 ]);
             }
-        }catch(Exception $e){
+        }catch(\Exception $e){
             return response()->json([
                'success'=>false,
                'message'=>$e->getMessage(),
@@ -92,7 +92,7 @@ class CategoryController extends Controller
                     'message'=>'Category Not found'
                 ]);
             }
-        }catch(Exception $e){
+        }catch(\Exception $e){
             return response()->json([
                 'success'=>false,
                 'message'=>$e->getMessage(),
@@ -127,7 +127,7 @@ class CategoryController extends Controller
                 ]);
             }
 
-        }catch(Exception $e){
+        }catch(\Exception $e){
             return response()->json([
                 'success'=>false,
                 'message'=>$e->getMessage(),
@@ -143,8 +143,13 @@ class CategoryController extends Controller
     public function destroy(string $id)
     {
         try {
-            $category=Category::findOrFail($id)->delete();
+            $category=Category::find($id);
+
             if($category){
+                $category->bills()->delete();
+                $category->budgets()->delete();
+                $category->plans()->delete();
+                $category->delete();
                 return response()->json([
                     'success'=>true,
                     'message'=>'Category deleted successfully'
@@ -155,7 +160,7 @@ class CategoryController extends Controller
                     'message'=>'some problem'
                 ]);
             }
-        }catch(Exception $e){
+        }catch(\Exception $e){
             return response()->json([
                 'success'=>false,
                 'message'=>$e->getMessage(),
