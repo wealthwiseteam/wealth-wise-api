@@ -21,9 +21,6 @@ class TransactionFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => function () {
-                return User::factory()->create()->id;
-            },
             'name' => $this->faker->word,
             'type' => $this->faker->randomElement(['income', 'expenses', 'transfer']),
             'amount' => $this->faker->randomFloat(2, 0, 10000),

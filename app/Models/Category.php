@@ -12,7 +12,9 @@ class Category extends Model
     protected $fillable=[
         'name',
         'description',
-        'visible'
+        'is_active',
+        'icon',
+        'color'
     ];
 
     public function budgets(): \Illuminate\Database\Eloquent\Relations\HasMany
@@ -22,6 +24,10 @@ class Category extends Model
 
     public function plans(){
         return $this->hasMany(Plan::class);
+    }
+
+    public function bills(){
+        return $this->hasMany(Bill::class);
     }
 
 }

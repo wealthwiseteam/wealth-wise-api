@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
         //  $this->call(TipSeeder::class);
 
         //$this->call(AccountSeeder::class);
-        //$this->call(TransactionSeeder::class);
+        $this->call(TransactionSeeder::class);
 
         // \App\Models\User::factory(10)->create();
 

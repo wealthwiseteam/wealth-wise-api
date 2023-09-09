@@ -21,7 +21,7 @@ class CategoryFactory extends Factory
         return [
             'name' => $this->faker->word,
             'description' => $this->faker->sentence,
-            'visible' => $this->faker->boolean,
+            'is_active' => $this->faker->boolean,
         ];
     }
 }

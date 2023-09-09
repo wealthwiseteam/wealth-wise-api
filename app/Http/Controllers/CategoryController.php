@@ -133,8 +133,6 @@ class CategoryController extends Controller
                 'message'=>$e->getMessage(),
             ]);
         }
-
-
     }
 
     /**

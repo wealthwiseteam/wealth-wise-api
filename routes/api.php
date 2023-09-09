@@ -39,7 +39,7 @@ Route::group(['middleware'=>['auth:sanctum']],function (){
     Route::get('/budget/show/{id}',[BudgetController::class,'show']);
     Route::post('/budget/add',[BudgetController::class,'store']);
     Route::post('/budget/update/{id}',[BudgetController::class,'update']);
-    Route::post('/budget/delete/{id}',[BudgetController::class,'destroy']);
+    Route::delete('/budget/delete/{id}',[BudgetController::class,'destroy']);
 
 
     Route::get('/plan/all',[PlanController::class,'index']);
