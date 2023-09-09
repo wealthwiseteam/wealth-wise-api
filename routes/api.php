@@ -33,7 +33,7 @@ Route::group(['middleware'=>['auth:sanctum']],function (){
     Route::get('/category/show/{id}',[CategoryController::class,'show']);
     Route::post('/category/add',[CategoryController::class,'store']);
     Route::post('/category/update/{id}',[CategoryController::class,'update']);
-    Route::post('/category/delete/{id}',[CategoryController::class,'destroy']);
+    Route::delete('/category/delete/{id}',[CategoryController::class,'destroy']);
 
     Route::get('/budget/all',[BudgetController::class,'index']);
     Route::get('/budget/show/{id}',[BudgetController::class,'show']);
