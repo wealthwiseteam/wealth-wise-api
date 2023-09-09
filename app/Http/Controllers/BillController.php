@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Bill;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class BillController extends Controller
 {
@@ -28,8 +29,20 @@ class BillController extends Controller
 
     public function index()
     {
-        $bills=Bill::all();
-        return response($bills);
+        try{
+            $bills=Bill::all();
+            if($bills){
+                return response()->json([
+                    'success'=>true,
+                    'category'=>$bills
+                ]);
+            }
+        }catch(\Exception $e){
+            return response()->json([
+                'success'=>false,
+                'message'=>$e->getMessage(),
+            ]);
+        }
     }
 
     /**
@@ -55,9 +68,43 @@ class BillController extends Controller
      */
     public function store(Request $request)
     {
-        return response([
-            'message'=>'this is store method in bill controller'
-        ]);
+        try{
+            $validation=Validator::make($request->all(),[
+                'name'=>'required|string|max:100|unique:bills',
+                'user_id'=>'required|exists:users,id',
+                'amount'=>'required|numeric',
+                'category_id'=>'required|exists:categories,id',
+                'payment_date'=>'required|date',
+                'status'=>'required|boolean',
+                'period'=>'required|date',
+
+            ]);
+            if($validation->fails()){
+                return response()->json([
+                    'success'=>false,
+                    'message'=>$validation->errors()->all(),
+                ]);
+            }else{
+                $result=Bill::create($validation->validated());
+                if($result){
+                    return response()->json([
+                        'success'=>true,
+                        'message'=>"Bill Add Successfully"
+                    ]);
+                }else{
+                    return response()->json([
+                        'success'=>true,
+                        'message'=>'some problem'
+                    ]);
+                }
+            }
+
+        }catch(\Exception $e){
+            return response()->json([
+                'success'=>false,
+                'message'=>$e->getMessage(),
+            ]);
+        }
     }
 
 
@@ -83,9 +130,25 @@ class BillController extends Controller
 
     public function show(string $id)
     {
-        return response([
-            'message'=>'this is show method in bill controller to show one bill'
-        ]);
+        try{
+            $bill=Bill::find($id);
+            if($bill){
+                return response()->json([
+                    'success'=>true,
+                    'bill'=>$bill
+                ]);
+            }else{
+                return response()->json([
+                    'success'=>false,
+                    'message'=>'Bill Not found'
+                ]);
+            }
+        }catch(\Exception $e){
+            return response()->json([
+                'success'=>false,
+                'message'=>$e->getMessage(),
+            ]);
+        }
     }
 
 
@@ -119,9 +182,36 @@ class BillController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        return response([
-            'message'=>'this is update method in bill controller'
-        ]);
+        try{
+            $bill=Bill::findOrFail($id);
+            $validation=Validator::make($request->all(),[
+                'name'=>'required|string|max:100|unique:bills',
+                'user_id'=>'required|exists:users,id',
+                'amount'=>'required|numeric',
+                'category_id'=>'required|exists:categories,id',
+                'payment_date'=>'required|date',
+                'status'=>'required|boolean',
+                'period'=>'required|date',
+            ]);
+            if ($validation->fails()){
+                return response()->json([
+                    'success'=>false,
+                    'message'=>$validation->errors()->all(),
+                ]);
+            }else{
+                $bill->update($validation->validated());
+                return response()->json([
+                    'success'=>true,
+                    'message'=>'Bill updated successfully '
+                ]);
+            }
+
+        }catch(\Exception $e){
+            return response()->json([
+                'success'=>false,
+                'message'=>$e->getMessage(),
+            ]);
+        }
     }
 
     /**
@@ -144,8 +234,28 @@ class BillController extends Controller
      */
     public function destroy(string $id)
     {
-        return response([
-            'message'=>'this is destroy method in bill controller'
-        ]);
+        try {
+            $bill=Bill::find($id);
+
+            if($bill){
+                $bill->delete();
+                return response()->json([
+                    'success'=>true,
+                    'message'=>'Bill deleted successfully'
+                ]);
+            }else{
+                return response()->json([
+                    'success'=>false,
+                    'message'=>'some problem'
+                ]);
+            }
+        }catch(\Exception $e){
+            return response()->json([
+                'success'=>false,
+                'message'=>$e->getMessage(),
+            ]);
+        }
+
     }
+
 }

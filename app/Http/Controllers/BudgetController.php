@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Budget;
-use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -149,7 +148,7 @@ class BudgetController extends Controller
             if($budget){
                 return response()->json([
                     'success'=>true,
-                    'category'=>$budget
+                    'budget'=>$budget
                 ]);
             }else{
                 return response()->json([
