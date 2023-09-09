@@ -15,10 +15,14 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->double('amount');
-            $table->foreignId('category_id')->constrained();
+
+            $table->foreignId('category_id')->constrained()->onDelete('cascade');
+
             $table->dateTimeTz('payment_date');
             $table->boolean('status');
-            $table->foreignId('user_id')->constrained();
+
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+
             $table->dateTimeTz('period');
 
             $table->timestamps();
@@ -30,6 +34,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+
         Schema::dropIfExists('bills');
     }
 };

@@ -21,8 +21,10 @@ return new class extends Migration
             $table->dateTimeTz('end_date');
             $table->double('current_amount');
             $table->double('target_amount');
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('category_id')->constrained();
+
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+
+            $table->foreignId('category_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

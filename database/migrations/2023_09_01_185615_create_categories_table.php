@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->text('description');
-            $table->boolean('visible')->default('1');
+            $table->boolean('is_active')->default('1');
+            $table->string('icon')->nullable();
+            $table->string('color')->nullable();
             $table->timestamps();
         });
 
@@ -26,6 +28,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+
         Schema::dropIfExists('categories');
     }
 };
