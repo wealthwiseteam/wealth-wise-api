@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Plan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PlanController extends Controller
 {
@@ -26,8 +27,20 @@ class PlanController extends Controller
      */
     public function index()
     {
-        $plans=Plan::all();
-        return response($plans);
+        try{
+            $plan=Plan::all();
+            if($plan){
+                return response()->json([
+                    'success'=>true,
+                    'plan'=>$plan
+                ]);
+            }
+        }catch(\Exception $e){
+            return response()->json([
+                'success'=>false,
+                'message'=>$e->getMessage(),
+            ]);
+        }
     }
 
     /**
@@ -57,9 +70,46 @@ class PlanController extends Controller
      */
     public function store(Request $request)
     {
-        return response([
-            'message'=>'this is store method in plan controller'
-        ]);
+        try{
+            $validation=Validator::make($request->all(),[
+                'name' => 'required|string',
+                'icon' => 'required|string',
+                'color' => 'required|string',
+                'note' => 'nullable|string',
+                'start_date' => 'required|date',
+                'end_date' =>'required|date',
+                'current_amount' => 'required|numeric',
+                'target_amount' => 'required|numeric',
+                'user_id' => 'required|exists:users,id',
+                'category_id' => 'required|exists:categories,id',
+
+            ]);
+            if($validation->fails()){
+                return response()->json([
+                    'success'=>false,
+                    'message'=>$validation->errors()->all(),
+                ]);
+            }else{
+                $result=Plan::create($validation->validated());
+                if($result){
+                    return response()->json([
+                        'success'=>true,
+                        'message'=>"Plan Add Successfully"
+                    ]);
+                }else{
+                    return response()->json([
+                        'success'=>true,
+                        'message'=>'some problem'
+                    ]);
+                }
+            }
+
+        }catch(\Exception $e){
+            return response()->json([
+                'success'=>false,
+                'message'=>$e->getMessage(),
+            ]);
+        }
     }
 
     /**
@@ -87,9 +137,25 @@ class PlanController extends Controller
      */
     public function show(string $id)
     {
-        return response([
-            'message'=>'this is show method in plan controller to show one plan'
-        ]);
+        try{
+            $plan=Plan::find($id);
+            if($plan){
+                return response()->json([
+                    'success'=>true,
+                    'plan'=>$plan
+                ]);
+            }else{
+                return response()->json([
+                    'success'=>false,
+                    'message'=>'Plan Not found'
+                ]);
+            }
+        }catch(\Exception $e){
+            return response()->json([
+                'success'=>false,
+                'message'=>$e->getMessage(),
+            ]);
+        }
     }
 
     /**
@@ -126,9 +192,39 @@ class PlanController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        return response([
-            'message'=>'this is update method in plan controller'
-        ]);
+        try{
+            $plan=Plan::findOrFail($id);
+            $validation=Validator::make($request->all(),[
+                'name' => 'required|string',
+                'icon' => 'required|string',
+                'color' => 'required|string',
+                'note' => 'nullable|string',
+                'start_date' => 'required|date',
+                'end_date' =>'required|date',
+                'current_amount' => 'required|numeric',
+                'target_amount' => 'required|numeric',
+                'user_id' => 'required|exists:users,id',
+                'category_id' => 'required|exists:categories,id',
+            ]);
+            if ($validation->fails()){
+                return response()->json([
+                    'success'=>false,
+                    'message'=>$validation->errors()->all(),
+                ]);
+            }else{
+                $plan->update($validation->validated());
+                return response()->json([
+                    'success'=>true,
+                    'message'=>'Plan updated successfully '
+                ]);
+            }
+
+        }catch(\Exception $e){
+            return response()->json([
+                'success'=>false,
+                'message'=>$e->getMessage(),
+            ]);
+        }
     }
 
     /**
@@ -155,8 +251,26 @@ class PlanController extends Controller
      */
     public function destroy(string $id)
     {
-        return response([
-            'message'=>'this is delete method in plan controller'
-        ]);
+        try {
+            $plan=Plan::find($id);
+
+            if($plan){
+                $plan->delete();
+                return response()->json([
+                    'success'=>true,
+                    'message'=>'Plan deleted successfully'
+                ]);
+            }else{
+                return response()->json([
+                    'success'=>false,
+                    'message'=>'some problem'
+                ]);
+            }
+        }catch(\Exception $e){
+            return response()->json([
+                'success'=>false,
+                'message'=>$e->getMessage(),
+            ]);
+        }
     }
 }

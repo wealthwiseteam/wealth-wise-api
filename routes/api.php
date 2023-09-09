@@ -46,7 +46,7 @@ Route::group(['middleware'=>['auth:sanctum']],function (){
     Route::get('/plan/show/{id}',[PlanController::class,'show']);
     Route::post('/plan/add',[PlanController::class,'store']);
     Route::post('/plan/update/{id}',[PlanController::class,'update']);
-    Route::post('/plan/delete/{id}',[PlanController::class,'destroy']);
+    Route::delete('/plan/delete/{id}',[PlanController::class,'destroy']);
 
 
     Route::get('/bill/all',[BillController::class,'index']);

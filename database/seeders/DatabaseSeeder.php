@@ -21,12 +21,12 @@ class DatabaseSeeder extends Seeder
 
         //$this->call(CategorySeeder::class);
         //$this->call(BudgetSeeder::class);
-       // $this->call(PlanSeeder::class);
+        //$this->call(PlanSeeder::class);
        // $this->call(BillSeeder::class);
         //  $this->call(TipSeeder::class);
 
         //$this->call(AccountSeeder::class);
-        $this->call(TransactionSeeder::class);
+        //$this->call(TransactionSeeder::class);
 
         // \App\Models\User::factory(10)->create();
 
