@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Tip;
 use Illuminate\Http\Request;
 
 class TipController extends Controller
@@ -21,14 +22,41 @@ class TipController extends Controller
      * )
      */
     public function index(){
-        return response([
-            'message'=>'this is show method to show all tips and advices',
-        ]);
+        try{
+            $tips=Tip::all();
+            if($tips){
+                return response()->json([
+                    'success'=>true,
+                    'tip'=>$tips
+                ]);
+            }
+        }catch(\Exception $e){
+            return response()->json([
+                'success'=>false,
+                'message'=>$e->getMessage(),
+            ]);
+        }
     }
 
-    public function show(){
-        return response([
-            'message'=>'this is show method in tip controller to show one tip'
-        ]);
+    public function show(string $id){
+        try{
+            $tip=Tip::find($id);
+            if($tip){
+                return response()->json([
+                    'success'=>true,
+                    'tip'=>$tip
+                ]);
+            }else{
+                return response()->json([
+                    'success'=>false,
+                    'message'=>'Tip Not found'
+                ]);
+            }
+        }catch(\Exception $e){
+            return response()->json([
+                'success'=>false,
+                'message'=>$e->getMessage(),
+            ]);
+        }
     }
 }
