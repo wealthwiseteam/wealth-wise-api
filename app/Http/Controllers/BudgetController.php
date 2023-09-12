@@ -39,7 +39,7 @@ class BudgetController extends Controller
             if($budgets){
                 return response()->json([
                     'success'=>true,
-                    'category'=>$budgets
+                    'budget'=>$budgets
                 ]);
             }
         }catch(\Exception $e){
