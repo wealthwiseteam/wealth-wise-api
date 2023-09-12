@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\Bill;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class AccountController extends Controller
 {
@@ -28,8 +29,21 @@ class AccountController extends Controller
 
     public function index()
     {
-        $accounts=Account::all();
-        return response($accounts);
+        try{
+            $accounts=Account::all();
+            if($accounts){
+                return response()->json([
+                    'success'=>true,
+                    'account'=>$accounts
+                ]);
+            }
+        }catch(\Exception $e){
+            return response()->json([
+                'success'=>false,
+                'message'=>$e->getMessage(),
+            ]);
+        }
+
     }
 
     /**
@@ -55,9 +69,39 @@ class AccountController extends Controller
      */
     public function store(Request $request)
     {
-        return response([
-            'message'=>'this is store method in account controller'
-        ]);
+        try{
+            $validation=Validator::make($request->all(),[
+                'name'=>'required|string|max:100|unique:accounts',
+                'user_id'=>'required|exists:users,id',
+                'amount'=>'required|numeric',
+                'type'=>'required|in:Credit Card,E-wallet',
+            ]);
+            if($validation->fails()){
+                return response()->json([
+                    'success'=>false,
+                    'message'=>$validation->errors()->all(),
+                ]);
+            }else{
+                $result=Account::create($validation->validated());
+                if($result){
+                    return response()->json([
+                        'success'=>true,
+                        'message'=>"Account Add Successfully"
+                    ]);
+                }else{
+                    return response()->json([
+                        'success'=>true,
+                        'message'=>'some problem'
+                    ]);
+                }
+            }
+
+        }catch(\Exception $e){
+            return response()->json([
+                'success'=>false,
+                'message'=>$e->getMessage(),
+            ]);
+        }
     }
 
 
@@ -83,9 +127,25 @@ class AccountController extends Controller
 
     public function show(string $id)
     {
-        return response([
-            'message'=>'this is show method in bill controller to show one bill'
-        ]);
+        try{
+            $account=Account::find($id);
+            if($account){
+                return response()->json([
+                    'success'=>true,
+                    'account'=>$account
+                ]);
+            }else{
+                return response()->json([
+                    'success'=>false,
+                    'message'=>'Account Not found'
+                ]);
+            }
+        }catch(\Exception $e){
+            return response()->json([
+                'success'=>false,
+                'message'=>$e->getMessage(),
+            ]);
+        }
     }
 
 
@@ -119,9 +179,33 @@ class AccountController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        return response([
-            'message'=>'this is update method in account controller'
-        ]);
+        try{
+            $account=Account::findOrFail($id);
+            $validation=Validator::make($request->all(),[
+                'name'=>'required|string|max:100|unique:accounts',
+                'user_id'=>'required|exists:users,id',
+                'amount'=>'required|numeric',
+                'type'=>'required|in:Credit Card,E-wallet',
+            ]);
+            if ($validation->fails()){
+                return response()->json([
+                    'success'=>false,
+                    'message'=>$validation->errors()->all(),
+                ]);
+            }else{
+                $account->update($validation->validated());
+                return response()->json([
+                    'success'=>true,
+                    'message'=>'Account updated successfully '
+                ]);
+            }
+
+        }catch(\Exception $e){
+            return response()->json([
+                'success'=>false,
+                'message'=>$e->getMessage(),
+            ]);
+        }
     }
 
     /**
@@ -144,8 +228,26 @@ class AccountController extends Controller
      */
     public function destroy(string $id)
     {
-        return response([
-            'message'=>'this is destroy method in account controller'
-        ]);
+        try {
+            $account=Account::find($id);
+
+            if($account){
+                $account->delete();
+                return response()->json([
+                    'success'=>true,
+                    'message'=>'Account deleted successfully'
+                ]);
+            }else{
+                return response()->json([
+                    'success'=>false,
+                    'message'=>'some problem'
+                ]);
+            }
+        }catch(\Exception $e){
+            return response()->json([
+                'success'=>false,
+                'message'=>$e->getMessage(),
+            ]);
+        }
     }
 }

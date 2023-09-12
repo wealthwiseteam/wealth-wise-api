@@ -59,7 +59,7 @@ Route::group(['middleware'=>['auth:sanctum']],function (){
     Route::get('/account/show/{id}',[AccountController::class,'show']);
     Route::post('/account/add',[AccountController::class,'store']);
     Route::post('/account/update/{id}',[AccountController::class,'update']);
-    Route::post('/account/delete/{id}',[AccountController::class,'destroy']);
+    Route::delete('/account/delete/{id}',[AccountController::class,'destroy']);
 
     //Routes for transactions not complete
 
