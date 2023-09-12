@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->enum('type', ['transfer','income','expenses' ]);
+            $table->enum('type', ['income','expenses' ]);
             $table->double('amount');
             $table->foreignId('account_id')->constrained()->cascadeOnDelete();
             $table->timestamps();

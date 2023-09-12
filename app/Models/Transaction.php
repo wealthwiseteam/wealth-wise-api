@@ -8,8 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Transaction extends Model
 {
     use HasFactory;
-    protected $table='transactions';
-    protected $fillable = [
+    protected $fillable=[
         'name',
         'account_id',
         'amount',
@@ -19,4 +18,6 @@ class Transaction extends Model
     public function accounts(){
         return $this->belongsTo(Account::class);
     }
+
+
 }

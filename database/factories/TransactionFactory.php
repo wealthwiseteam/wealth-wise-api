@@ -4,11 +4,10 @@ namespace Database\Factories;
 
 use App\Models\Account;
 use App\Models\Transaction;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\odel=Transaction>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Transaction>
  */
 class TransactionFactory extends Factory
 {
@@ -22,7 +21,7 @@ class TransactionFactory extends Factory
     {
         return [
             'name' => $this->faker->word,
-            'type' => $this->faker->randomElement(['income', 'expenses', 'transfer']),
+            'type' => $this->faker->randomElement(['income', 'expenses']),
             'amount' => $this->faker->randomFloat(2, 0, 10000),
             'account_id' => function() {
                 return Account::factory()->create()->id;
