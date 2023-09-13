@@ -13,11 +13,8 @@ return new class extends Migration
     {
         Schema::create('accounts', function (Blueprint $table) {
             $table->id();
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+
 
             $table->string('name');
             $table->enum('type', ['Credit Card', 'E-wallet']);
