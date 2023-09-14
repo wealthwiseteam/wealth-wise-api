@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\AccountController;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AuthController\LoginController;
+use App\Http\Controllers\AuthController\LogoutController;
+use App\Http\Controllers\AuthController\RegisterController;
+use App\Http\Controllers\AuthController\VerfiyEmailController;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\BudgetController;
 use App\Http\Controllers\CategoryController;
@@ -22,12 +25,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 //public routes
-Route::post('register',[AuthController::class,'register']);
-Route::post('login',[AuthController::class,'login']);
+Route::post('register',[RegisterController::class,'register']);
+Route::post('login',[LoginController::class,'login']);
 
 //protected routes
-Route::group(['middleware'=>['auth:sanctum' , 'abilities:check-status,place-orders']],function (){
-    Route::post('/logout',[AuthController::class,'logout']);
+Route::group(['middleware'=>['auth:sanctum' ,'verified']],function (){
+
+    Route::get('email/resend', [VerfiyEmailController::class,'sendVerificationEmail'])->name('verification.resend');;
+    Route::get('email/verify/{id}', [VerfiyEmailController::class,'verify'])->name('verification.verify'); // Make sure to keep this as your route name
+
+
+    Route::post('/logout',[LogoutController::class,'logout']);
 
     Route::get('/category/all',[CategoryController::class,'index']);
     Route::get('/category/show/{id}',[CategoryController::class,'show']);
