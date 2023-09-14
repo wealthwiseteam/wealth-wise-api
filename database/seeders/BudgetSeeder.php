@@ -13,6 +13,6 @@ class BudgetSeeder extends Seeder
      */
     public function run(): void
     {
-        Budget::factory(2)->create();
+        Budget::factory(5)->create();
     }
 }

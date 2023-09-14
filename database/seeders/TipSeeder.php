@@ -13,6 +13,6 @@ class TipSeeder extends Seeder
      */
     public function run(): void
     {
-        Tip::factory(2)->create();
+        Tip::factory(10)->create();
     }
 }
