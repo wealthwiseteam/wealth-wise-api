@@ -6,7 +6,10 @@ use App\Filament\Resources\BudgetResource\Pages;
 use App\Filament\Resources\BudgetResource\RelationManagers;
 use App\Models\Budget;
 use Filament\Forms;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -23,7 +26,24 @@ class BudgetResource extends Resource
     {
         return $form
             ->schema([
-                //
+                TextInput::make('name')
+                    ->label('Name')
+                    ->placeholder('Enter the budget name')
+                    ->required(),
+                TextInput::make('amount')
+                    ->label('Amount')
+                    ->placeholder('Enter the budget amount')
+                    ->required()
+                    ->numeric(),
+                DatePicker::make('start_date')
+                    ->label('Start Date')
+                    ->placeholder('Select start date')
+                    ->required(),
+                DatePicker::make('end_date')
+                    ->label('End Date')
+                    ->placeholder('Select end date')
+                    ->required(),
+
             ]);
     }
 
