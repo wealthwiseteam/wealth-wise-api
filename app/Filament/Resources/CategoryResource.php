@@ -6,6 +6,10 @@ use App\Filament\Resources\CategoryResource\Pages;
 use App\Filament\Resources\CategoryResource\RelationManagers;
 use App\Models\Category;
 use Filament\Forms;
+use Filament\Forms\Components\ColorPicker;
+use Filament\Forms\Components\Radio;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -24,7 +28,15 @@ class CategoryResource extends Resource
     {
         return $form
             ->schema([
-                  TextInput::make('name')->reter,
+                TextInput::make('name')->unique()->columnSpan('full'),
+                Textarea::make('description')->autosize()->columnSpan('full'),
+                ColorPicker::make('color')->columnSpan('full'),
+                Radio::make('Status')
+                    ->label('Do you want to show it')
+                    ->boolean()
+                    ->inline()->columnSpan('full')
+
+
             ]);
     }
 
