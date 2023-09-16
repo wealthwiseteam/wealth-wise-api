@@ -6,9 +6,12 @@ use App\Filament\Resources\TipResource\Pages;
 use App\Filament\Resources\TipResource\RelationManagers;
 use App\Models\Tip;
 use Filament\Forms;
+use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -23,7 +26,12 @@ class TipResource extends Resource
     {
         return $form
             ->schema([
-                //
+                TextInput::make('name')
+                    ->label('Name')
+                    ->placeholder('Enter the plan  name')
+                    ->required(),
+                RichEditor::make('content')
+                    ->label('Content'),
             ]);
     }
 
@@ -31,7 +39,12 @@ class TipResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('title')
+                    ->label('Title')
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('content')
+                    ->label('content')
             ])
             ->filters([
                 //
@@ -48,14 +61,14 @@ class TipResource extends Resource
                 Tables\Actions\CreateAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -63,5 +76,5 @@ class TipResource extends Resource
             'create' => Pages\CreateTip::route('/create'),
             'edit' => Pages\EditTip::route('/{record}/edit'),
         ];
-    }    
+    }
 }
