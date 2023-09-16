@@ -2148,6 +2148,7 @@
             "time": "2023-08-27T10:19:19+00:00"
         },
         {
+<<<<<<< HEAD
             "name": "kirschbaum-development/eloquent-power-joins",
             "version": "3.2.4",
             "source": {
@@ -2219,6 +2220,17 @@
             },
             "dist": {
                 "type": "zip",
+=======
+            "name": "laravel/framework",
+            "version": "v10.23.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/framework.git",
+                "reference": "dbfd495557678759153e8d71cc2f6027686ca51e"
+            },
+            "dist": {
+                "type": "zip",
+>>>>>>> 8a18d3f (edit database seeder and budget factory)
                 "url": "https://api.github.com/repos/laravel/framework/zipball/dbfd495557678759153e8d71cc2f6027686ca51e",
                 "reference": "dbfd495557678759153e8d71cc2f6027686ca51e",
                 "shasum": ""
@@ -4696,6 +4708,7 @@
             "time": "2023-04-15T23:01:58+00:00"
         },
         {
+<<<<<<< HEAD
             "name": "ryangjchandler/blade-capture-directive",
             "version": "v0.3.0",
             "source": {
@@ -4968,6 +4981,17 @@
             },
             "dist": {
                 "type": "zip",
+=======
+            "name": "swagger-api/swagger-ui",
+            "version": "v5.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/swagger-api/swagger-ui.git",
+                "reference": "efe613322dc3f5ba0f73fe1e4d7d1b48fdec23f4"
+            },
+            "dist": {
+                "type": "zip",
+>>>>>>> 8a18d3f (edit database seeder and budget factory)
                 "url": "https://api.github.com/repos/swagger-api/swagger-ui/zipball/efe613322dc3f5ba0f73fe1e4d7d1b48fdec23f4",
                 "reference": "efe613322dc3f5ba0f73fe1e4d7d1b48fdec23f4",
                 "shasum": ""
@@ -5536,6 +5560,7 @@
             "time": "2023-07-31T08:31:44+00:00"
         },
         {
+<<<<<<< HEAD
             "name": "symfony/html-sanitizer",
             "version": "v6.3.4",
             "source": {
@@ -5614,6 +5639,17 @@
             },
             "dist": {
                 "type": "zip",
+=======
+            "name": "symfony/http-foundation",
+            "version": "v6.3.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/http-foundation.git",
+                "reference": "cac1556fdfdf6719668181974104e6fcfa60e844"
+            },
+            "dist": {
+                "type": "zip",
+>>>>>>> 8a18d3f (edit database seeder and budget factory)
                 "url": "https://api.github.com/repos/symfony/http-foundation/zipball/cac1556fdfdf6719668181974104e6fcfa60e844",
                 "reference": "cac1556fdfdf6719668181974104e6fcfa60e844",
                 "shasum": ""
@@ -10133,5 +10169,5 @@
         "php": "^8.1"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.3.0"
 }

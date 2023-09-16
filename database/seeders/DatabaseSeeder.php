@@ -19,14 +19,22 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
+<<<<<<< HEAD
         //$this->call(CategorySeeder::class);
           //$this->call(BudgetSeeder::class);
         //$this->call(PlanSeeder::class);
         $this->call(BillSeeder::class);
         //$this->call(TipSeeder::class);
+=======
+        $this->call(CategorySeeder::class);
+        $this->call(BudgetSeeder::class);
+        $this->call(PlanSeeder::class);
+        $this->call(BillSeeder::class);
+        $this->call(TipSeeder::class);
+>>>>>>> 8a18d3f (edit database seeder and budget factory)
 
-        //$this->call(AccountSeeder::class);
-        //$this->call(TransactionSeeder::class);
+        $this->call(AccountSeeder::class);
+        $this->call(TransactionSeeder::class);
 
 
          //\App\Models\User::factory(10)->create();

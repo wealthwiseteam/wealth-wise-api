@@ -22,7 +22,11 @@ class BudgetFactory extends Factory
         return [
             'name' => $this->faker->word,
             'user_id' => function(){
+<<<<<<< HEAD
                  return User::factory()->create()->id;
+=======
+            return User::factory()->create()->id;
+>>>>>>> 8a18d3f (edit database seeder and budget factory)
             },
             'amount' => $this->faker->randomFloat(2, 1000, 10000),
             'category_id' => $this->faker->numberBetween(1, 2),
