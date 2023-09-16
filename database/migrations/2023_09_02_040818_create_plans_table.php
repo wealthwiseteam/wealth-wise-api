@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('plans', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('icon');
-            $table->string('color');
-            $table->text('note');
+            $table->string('icon')->nullable();
+            $table->string('color')->nullable();
+            $table->text('note')->nullable();
             $table->dateTimeTz('start_date');
             $table->dateTimeTz('end_date');
             $table->double('current_amount');

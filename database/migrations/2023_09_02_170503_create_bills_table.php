@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
 
             $table->dateTimeTz('payment_date');
+
             $table->boolean('status');
 
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
