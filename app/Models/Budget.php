@@ -19,11 +19,12 @@ class Budget extends Model
         'period'
     ];
 
-    public function categories(){
+    public function category(){
         return $this->belongsTo(Category::class);
     }
 
     public function users(){
         return $this->belongsTo(User::class);
     }
+
 }
