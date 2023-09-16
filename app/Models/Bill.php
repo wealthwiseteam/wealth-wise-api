@@ -19,7 +19,7 @@ class Bill extends Model
         'period'
     ];
 
-    public function users(){
+    public function user(){
         return $this->belongsTo(User::class);
     }
 

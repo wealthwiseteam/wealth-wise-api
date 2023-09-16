@@ -15,11 +15,11 @@ class Account extends Model
         'type',
         'amount',
     ];
-    public function users(){
+    public function user(){
         return $this->belongsTo(User::class);
     }
 
-    public function transactions(){
+    public function transaction(){
         return $this->hasMany(Transaction::class);
     }
 }

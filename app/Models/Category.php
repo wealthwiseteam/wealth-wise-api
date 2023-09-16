@@ -17,16 +17,16 @@ class Category extends Model
         'color'
     ];
 
-    public function budgets(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function budget(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Budget::class);
     }
 
-    public function plans(){
+    public function plan(){
         return $this->hasMany(Plan::class);
     }
 
-    public function bills(){
+    public function bill(){
         return $this->hasMany(Bill::class);
     }
 
