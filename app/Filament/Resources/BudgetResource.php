@@ -49,9 +49,19 @@ class BudgetResource extends Resource
                     ->placeholder('Select end date')
                     ->required(),
 
+                DatePicker::make('period')
+                    ->label('Period')
+                    ->placeholder('Select period date')
+                    ->required(),
+
                 Select::make('category_id')
                     ->label('Category')
                     ->relationship('category', 'name')
+                    ->required(),
+
+                Select::make('user_id')
+                    ->label('User')
+                    ->relationship('user', 'name')
                     ->required(),
             ]);
     }
@@ -79,6 +89,9 @@ class BudgetResource extends Resource
                     ->sortable(),
                 TextColumn::make('category.name')
                     ->label('Category'),
+
+                TextColumn::make('user.name')
+                    ->label('User Name'),
 
             ])
             ->filters([

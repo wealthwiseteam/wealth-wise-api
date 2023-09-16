@@ -33,7 +33,7 @@ class CategoryResource extends Resource
                 TextInput::make('name')->unique()->columnSpan('full'),
                 Textarea::make('description')->autosize()->columnSpan('full'),
                 ColorPicker::make('color')->columnSpan('full'),
-                Radio::make('Status')
+                Radio::make('status')
                     ->label('Do you want to show it')
                     ->boolean()
                     ->inline()->columnSpan('full')

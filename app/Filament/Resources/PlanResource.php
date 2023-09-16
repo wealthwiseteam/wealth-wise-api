@@ -6,6 +6,7 @@ use App\Filament\Resources\PlanResource\Pages;
 use App\Filament\Resources\PlanResource\RelationManagers;
 use App\Models\Plan;
 use Filament\Forms;
+use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
@@ -60,9 +61,12 @@ class PlanResource extends Resource
                 Select::make('user_id')
                     ->label('user')
                     ->relationship('user', 'name')
-                    ->required(),
+                    ->required()->columnSpan('full'),
                 RichEditor::make('note')
-                    ->label('Note'),
+                    ->label('Note')->columnSpan('full'),
+
+                ColorPicker::make('color')->nullable(),
+                TextInput::make('icon')->nullable()
             ]);
     }
 
@@ -96,7 +100,9 @@ class PlanResource extends Resource
                 TextColumn::make('user.name')
                     ->label('User Name'),
                 TextColumn::make('note')
-                    ->label('Note')
+                    ->label('Note'),
+
+
             ])
             ->filters([
                 //

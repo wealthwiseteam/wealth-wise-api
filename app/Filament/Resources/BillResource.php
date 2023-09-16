@@ -43,7 +43,7 @@ class BillResource extends Resource
                     ->placeholder('Select payment date')
                     ->required(),
 
-                Radio::make('Status')
+                Radio::make('status')
                     ->label('Did you pay it')
                     ->boolean()
                     ->inline()->columnSpan('full'),

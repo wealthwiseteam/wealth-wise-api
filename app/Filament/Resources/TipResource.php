@@ -26,10 +26,11 @@ class TipResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('name')
-                    ->label('Name')
-                    ->placeholder('Enter the plan  name')
-                    ->required(),
+                TextInput::make('title')
+                    ->label('Title')
+                    ->placeholder('Enter the Title  name')
+                    ->required()
+                    ->columnSpan('full'),
                 RichEditor::make('content')
                     ->label('Content'),
             ]);
